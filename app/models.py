@@ -1,7 +1,7 @@
-from app import db
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from flask_principal import RoleNeed, Permission
-from werkzeug.security import generate_password_hash, check_password_hash
+from app import db
 
 class User(UserMixin, db.Model):
 	__tablename__ = 'user'
@@ -13,6 +13,7 @@ class User(UserMixin, db.Model):
 	first_name = db.Column(db.String(64), nullable=False)
 	last_name = db.Column(db.String(64), nullable=False)
 	role_id = db.Column(db.Integer, db.ForeignKey('role.id'), nullable=False)
+	student_profile = db.relationship('StudentProfile', backref='user', uselist=False)
 
 	def set_password(self, password):
 		self.password_hash = generate_password_hash(password)
@@ -31,6 +32,7 @@ class State(db.Model):
 	__table_args__ = {'extend_existing': True}
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(64), unique=True, nullable=False)
+	students = db.relationship('StudentProfile', backref='state', lazy=True)
 
 class StudentProfile(db.Model):
 	__tablename__ = 'student_profile'

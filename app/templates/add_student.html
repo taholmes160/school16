@@ -1,50 +1,39 @@
 {% extends "base.html" %}
 
-{% block title %}Add Student{% endblock %}
+{% block title %}Student List{% endblock %}
 
 {% block content %}
-<h1>Add Student</h1>
-<form method="POST">
-  <div class="form-group">
-	<label for="first_name">First Name</label>
-	<input type="text" class="form-control" id="first_name" name="first_name" required>
-  </div>
-  <div class="form-group">
-	<label for="last_name">Last Name</label>
-	<input type="text" class="form-control" id="last_name" name="last_name" required>
-  </div>
-  <div class="form-group">
-	<label for="grade">Grade</label>
-	<input type="number" class="form-control" id="grade" name="grade" required>
-  </div>
-  <div class="form-group">
-	<label for="address1">Address 1</label>
-	<input type="text" class="form-control" id="address1" name="address1" required>
-  </div>
-  <div class="form-group">
-	<label for="address2">Address 2</label>
-	<input type="text" class="form-control" id="address2" name="address2">
-  </div>
-  <div class="form-group">
-	<label for="city">City</label>
-	<input type="text" class="form-control" id="city" name="city" required>
-  </div>
-  <div class="form-group">
-	<label for="state_id">State</label>
-	<select class="form-control" id="state_id" name="state_id" required>
-	  {% for state in states %}
-	  <option value="{{ state.id }}">{{ state.name }}</option>
-	  {% endfor %}
-	</select>
-  </div>
-  <div class="form-group">
-	<label for="zip_code">Zip Code</label>
-	<input type="text" class="form-control" id="zip_code" name="zip_code" required>
-  </div>
-  <div class="form-group">
-	<label for="birth_date">Birth Date</label>
-	<input type="date" class="form-control" id="birth_date" name="birth_date" required>
-  </div>
-  <button type="submit" class="btn btn-primary">Add Student</button>
-</form>
+<h2>Student List</h2>
+<table class="table">
+	<thead>
+		<tr>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Username</th>
+			<th>Email</th>
+			<th>Grade</th>
+			<th>Address</th>
+			<th>City</th>
+			<th>State</th>
+			<th>Zip Code</th>
+			<th>Birth Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for student in students %}
+		<tr>
+			<td>{{ student.user.first_name }}</td>
+			<td>{{ student.user.last_name }}</td>
+			<td>{{ student.user.username }}</td>
+			<td>{{ student.user.email }}</td>
+			<td>{{ student.grade }}</td>
+			<td>{{ student.address1 }} {{ student.address2 }}</td>
+			<td>{{ student.city }}</td>
+			<td>{{ student.state.name }}</td>
+			<td>{{ student.zip_code }}</td>
+			<td>{{ student.birth_date }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
 {% endblock %}
