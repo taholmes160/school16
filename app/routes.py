@@ -3,6 +3,7 @@ from app.models import User, Role, State, StudentProfile, admin_permission, teac
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_principal import PermissionDenied
+from sqlalchemy.orm import joinedload
 from app.forms import LoginForm
 from datetime import datetime
 
@@ -24,11 +25,11 @@ def generate_username():
         new_number = 1
     return f'stu{current_year}{new_number:04d}'
 
-@app.route('/students', methods=['GET', 'POST'])
+@app.route('/students', methods=['GET'])
 @login_required
 def student_list():
-    students = StudentProfile.query.all()
-    return render_template('student_list.html', students=students)
+    users = User.query.options(joinedload(User.student_profile)).all()
+    return render_template('student_list.html', users=users)
 
 @app.route('/add', methods=['GET', 'POST'])
 @login_required
