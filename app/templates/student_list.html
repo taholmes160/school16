@@ -4,7 +4,6 @@
 
 {% block content %}
 <h1>Students</h1>
-<a href="{{ url_for('add_student') }}" class="btn btn-primary">Add Student</a>
 <table class="table">
   <thead>
     <tr>
@@ -29,6 +28,7 @@
       <td>{{ user.student_profile.state.name if user.student_profile and user.student_profile.state else 'N/A' }}</td>
       <td>{{ user.student_profile.zip_code if user.student_profile else 'N/A' }}</td>
       <td>{{ user.student_profile.birth_date if user.student_profile else 'N/A' }}</td>
+      <td>{{ user.student_profile.new_field if user.student_profile else 'N/A' }}</td>
     </tr>
     {% endfor %}
   </tbody>

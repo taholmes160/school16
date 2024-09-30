@@ -1,39 +1,52 @@
 {% extends "base.html" %}
 
-{% block title %}Student List{% endblock %}
+{% block title %}Add Student{% endblock %}
 
 {% block content %}
-<h2>Student List</h2>
-<table class="table">
-	<thead>
-		<tr>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Username</th>
-			<th>Email</th>
-			<th>Grade</th>
-			<th>Address</th>
-			<th>City</th>
-			<th>State</th>
-			<th>Zip Code</th>
-			<th>Birth Date</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for student in students %}
-		<tr>
-			<td>{{ student.user.first_name }}</td>
-			<td>{{ student.user.last_name }}</td>
-			<td>{{ student.user.username }}</td>
-			<td>{{ student.user.email }}</td>
-			<td>{{ student.grade }}</td>
-			<td>{{ student.address1 }} {{ student.address2 }}</td>
-			<td>{{ student.city }}</td>
-			<td>{{ student.state.name }}</td>
-			<td>{{ student.zip_code }}</td>
-			<td>{{ student.birth_date }}</td>
-		</tr>
-		{% endfor %}
-	</tbody>
-</table>
+<h1>Add Student</h1>
+<form method="POST" action="{{ url_for('add_student') }}">
+	{{ form.hidden_tag() }}
+	<div class="form-group">
+		{{ form.first_name.label }} {{ form.first_name(class="form-control") }}
+	</div>
+	<div class="form-group">
+		{{ form.last_name.label }} {{ form.last_name(class="form-control") }}
+	</div>
+	<div class="form-group">
+		{{ form.email.label }} {{ form.email(class="form-control") }}
+	</div>
+	<div class="form-group">
+		{{ form.password.label }} {{ form.password(class="form-control") }}
+	</div>
+	<div class="form-group">
+		{{ form.confirm_password.label }} {{ form.confirm_password(class="form-control") }}
+	</div>
+	<div class="form-group">
+		{{ form.role_id.label }} {{ form.role_id(class="form-control") }}
+	</div>
+	<div class="form-group">
+		{{ form.grade.label }} {{ form.grade(class="form-control") }}
+	</div>
+	<div class="form-group">
+		{{ form.address1.label }} {{ form.address1(class="form-control") }}
+	</div>
+	<div class="form-group">
+		{{ form.address2.label }} {{ form.address2(class="form-control") }}
+	</div>
+	<div class="form-group">
+		{{ form.city.label }} {{ form.city(class="form-control") }}
+	</div>
+	<div class="form-group">
+		{{ form.state_id.label }} {{ form.state_id(class="form-control") }}
+	</div>
+	<div class="form-group">
+		{{ form.zip_code.label }} {{ form.zip_code(class="form-control") }}
+	</div>
+	<div class="form-group">
+		{{ form.birth_date.label }} {{ form.birth_date(class="form-control") }}
+	</div>
+	<div class="form-group">
+		{{ form.submit(class="btn btn-primary") }}
+	</div>
+</form>
 {% endblock %}
